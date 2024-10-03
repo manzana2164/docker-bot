@@ -1,0 +1,20 @@
+{
+    "name": "mi-chatbot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "dotenv": "^16.4.5",
+      "express": "^4.21.0",
+      "openai": "^4.67.1",
+      "qrcode-terminal": "^0.12.0",
+      "whatsapp-web.js": "^1.26.0"
+    }
+  }
+  
