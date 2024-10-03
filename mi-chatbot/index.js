@@ -1,9 +1,12 @@
-const { Client } = require('whatsapp-web.js');
+const { OpenAI } = require("openai");
 const qrcode = require('qrcode-terminal');
-const { OpenAIApi, Configuration } = require("openai");
+const { Client } = require('whatsapp-web.js');
 require('dotenv').config();
 
 const client = new Client();
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
@@ -15,11 +18,6 @@ client.on('ready', () => {
 
 client.initialize();
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
 client.on('message', async (message) => {
     console.log(message.body);
 
@@ -30,10 +28,10 @@ client.on('message', async (message) => {
 });
 
 async function runCompletion(message) {
-    const completion = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: message,
+    const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // o el modelo que estés utilizando
+        messages: [{ role: "user", content: message }],
         max_tokens: 200,
     });
-    return completion.data.choices[0].text;
+    return completion.choices[0].message.content;
 }
