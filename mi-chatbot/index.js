@@ -2,6 +2,13 @@ const { OpenAI } = require("openai");
 const qrcode = require('qrcode-terminal');
 const { Client } = require('whatsapp-web.js');
 require('dotenv').config();
+const puppeteer = require('puppeteer-core');
+
+(async () => {
+    const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/chromium-browser',
+        args: ['--no-sandbox', '--disable-setuid-sandbox'], 
+    });
 
 const client = new Client();
 const openai = new OpenAI({

@@ -20,5 +20,13 @@ EXPOSE 3000
 ENV CHROME_BIN=/usr/bin/chromium-browser
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
+#Instalar Chromium
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    fontconfig \
+    ttf-freefont
+
 # Comando para iniciar la aplicación
 CMD ["node", "index.js"]
