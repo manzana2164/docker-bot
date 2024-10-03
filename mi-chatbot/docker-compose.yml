@@ -5,10 +5,8 @@ services:
     build: .
     ports:
       - "3000:3000"
-    volumes:
-      - bot_data:/app/data  # Volumen persistente para datos del bot
+    shm_size: '1gb' # Aumentar el tamaño de /dev/shm
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Cargar variable de entorno desde .env
-
-volumes:
-  bot_data:  # Definir un volumen llamado bot_data
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - /dev/shm:/dev/shm
